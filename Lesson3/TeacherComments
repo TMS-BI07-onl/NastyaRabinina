@@ -1,0 +1,56 @@
+Well done!
+
+2.
+a)
+Technically, while writing second and third condition for this task you could leave only <100 and <500, because all conditions is being checked in the written order. It's just for your information. :)
+с)-1
+Correct answer:
+SELECT DISTINCT Name
+FROM Purchasing.Vendor v 
+		LEFT JOIN Purchasing.ProductVendor pv ON v.BusinessEntityID=pv.BusinessEntityID
+WHERE pv.BusinessEntityID IS NULL
+ProductVendor stores data about sales. So, you need to take ALL vendors and add sales for those who had that data. That's why Vendors should be the table on the left.
+Qty is a bad value to compare to NULL, 'cause it can be just NULL in the table, not  after the join.
+
+3.
+a)-1
+Correct answers:
+SELECT Название
+FROM Фирмы-производители 
+WHERE id NOT IN (SELECT преп.id_фирмы
+				FROM Фармпрепараты преп
+						JOIN Продажи прод ON преп.id=прод.id_фармпрепарата
+						JOIN Кассовые_чеки чек ON прод.id_чека=чек.id 
+				WHERE YEAR(Дата)=2019)
+--=
+SELECT преп.id_фирмы
+FROM Фирмы-производители фирма 
+	JOIN Фармпрепараты преп ON фирма.id=преп.id_фирмы
+	JOIN Продажи прод ON преп.id=прод.id_фармпрепарата
+	LEFT JOIN Кассовые_чеки чек ON прод.id_чека=чек.id 
+WHERE YEAR(Дата)=2019 AND чек.id IS NULL
+Your solution is not correct, because it will show all producers that have sales in other years. But that doesn't mean that these producers didn't have sales in the 2019.
+
+с) -0.5
+Correct answer:
+SELECT произв.Название, COUNT(преп.id) AS кол-во препаратов
+FROM Фирмы-производители произв
+	JOIN Фармпрепараты преп ON произв.id=преп.id_фирмы
+	JOIN Типы_фармпрепаратов тип ON тип.id=преп.id_типа
+WHERE Тип!='А'
+GROUP BY произв.Название
+You solve totally different task. But solved successfully. :)
+Your solution is for the task with calculation count of sold products, but we needed to count existed products in Фармпрепараты table.
+
+d) -0.5
+Correct answer:
+SELECT апт.Название, преп.Название
+FROM Фармпрепараты преп ON произв.id=преп.id_фирмы
+	JOIN Продажи прод ON преп.id=прод.id_фармпрепарата
+	JOIN Кассовые_чеки чек ON прод.id_чека=чек.id
+	JOIN Аптечные_пункты апт ON апт.id=прод.id_аптечного_пункта
+WHERE DATENAME(weekday, чек.Дата)='суббота'
+There is no need to have the whole query in the WHERE clause. It will decrease the perfomance a lot. Task can be solved without it.
+Also, you forgot to add datename/datepart function. Date in the table can't be stored as "6".
+
+Mark: 4
