@@ -1,0 +1,15 @@
+Задание 5
+Найдите значения count(1), count(name), count(id), count(*) для следующей таблицы:
+Id(PK)	Name		DepName
+1	null		A
+2	null		null
+3	A		C
+4	B		C
+
+
+SELECT COUNT(1) AS 1, COUNT(Name) AS Name, COUNT(ID) AS ID, COUNT(*) AS ALL
+FROM idNameDN
+
+Вывод
+ 1    Name   ID   ALL
+ 4      3     4    4
