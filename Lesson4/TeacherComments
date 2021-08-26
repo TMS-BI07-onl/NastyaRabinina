@@ -1,0 +1,20 @@
+Well done!
+
+4.
+b)
+You didn't need to insert values with <='CAN'. The task is clear about adding only rows with ='CAN'.
+
+d)
+We don't know this command yet. 
+
+f) -0.5
+I expected using ISNULL function for TerritoryGroup for replacing nulls. Your solution would be correct even without this function, if you used CONCAT function for login. In your case it returns NULL login for some person and that's wrong.
+Also, you don't need to use global ORDER BY when using window functions with ORDER BY. They will filter the whole result set.
+
+g)-1
+I don't see the solution for task 4g.
+
+5.
+Count(name) will not calculate nulls at all. The answer is 2.
+
+Mark: 9.
