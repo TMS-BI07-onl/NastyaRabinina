@@ -1,0 +1,73 @@
+CREATE TABLE Competition (
+	ID INT CONSTRAINT PK_Competition_Id PRIMARY KEY IDENTITY NOT NULL,
+	SwimmerID INT NOT NULL,
+	LocationID INT NOT NULL,
+	JudgeID INT NOT NULL,
+	ResultTime TIME NOT NULL,
+	StartDate DATETIME NOT NULL,
+	EndDate DATETIME
+	, CONSTRAINT FK_Competition_To_Swimmer FOREIGN KEY (SwimmerId)  REFERENCES Swimmer (Id),
+	CONSTRAINT FK_Competition_To_Location FOREIGN KEY (LocationId)  REFERENCES Locations (Id),
+	CONSTRAINT FK_Competition_To_Judge FOREIGN KEY (JudgeId)  REFERENCES Judge (Id)
+)
+
+--DROP TABLE [dbo].[Competition], [dbo].[Swimmer], [dbo].[Trainer]
+
+CREATE TABLE Swimmer (
+    ID INT CONSTRAINT PK_Swimmer_Id PRIMARY KEY IDENTITY NOT NULL,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	PassportNumber NVARCHAR(20) NOT NULL UNIQUE, 
+	BirthDate DATE,
+	Gender NVARCHAR(1) NOT NULL,
+	Rank NVARCHAR(10),
+	TrainerID INT NOT NULL
+	,CONSTRAINT FK_Swimmer_To_Trainer FOREIGN KEY (TrainerId)  REFERENCES Trainer (Id)
+)
+
+ALTER TABLE [dbo].[Judge]
+   ADD CONSTRAINT FK_Judge_To_Competition FOREIGN KEY (CompetitionId)  REFERENCES Competition (Id)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
+;
+
+CREATE TABLE Trainer (
+    ID INT CONSTRAINT PK_Trainer_Id PRIMARY KEY IDENTITY NOT NULL,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	PassportNumber NVARCHAR(20) NOT NULL UNIQUE, 
+	Rank NVARCHAR(10)
+)
+
+CREATE TABLE Team (
+    ID INT CONSTRAINT PK_Team_Id PRIMARY KEY IDENTITY NOT NULL,
+	Captain NVARCHAR(50) NOT NULL,
+	TeamName NVARCHAR(30) NOT NULL,
+	MemberNumber INT NOT NULL,
+	Country NVARCHAR(30)
+)
+
+CREATE TABLE Locations (
+    ID INT CONSTRAINT PK_Location_Id PRIMARY KEY IDENTITY NOT NULL,
+	LocationName NVARCHAR(50) NOT NULL,
+	Country NVARCHAR(50) NOT NULL
+)
+
+CREATE TABLE Judge (
+    ID INT CONSTRAINT PK_Judge_Id PRIMARY KEY IDENTITY NOT NULL,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	PassportNumber NVARCHAR(20) NOT NULL UNIQUE, 
+	CompetitionID INT NOT NULL,
+	Rank NVARCHAR(20),
+	SwimStyle NVARCHAR(30)
+	--,CONSTRAINT FK_Judge_To_Competition FOREIGN KEY (CompetitionId)  REFERENCES Competition (Id)
+)
+
+CREATE TABLE Swimmer_Team (
+    SwimmerID INT CONSTRAINT FK_Swimmer_To_Team FOREIGN KEY (SwimmerId)  REFERENCES Swimmer (Id) NOT NULL,
+	TeamID INT CONSTRAINT FK_Team_To_Swimmer FOREIGN KEY (TeamId)  REFERENCES Team (Id) NOT NULL
+	
+)
+
+
