@@ -1,0 +1,19 @@
+База данных "Школа"
+
+BD "School"
+
+Teacher: id,firstname, lastname, passport, gender, schoolId, classID
+Pupil: id,firstname, lastname, passport, gender, schoolId, classID
+Class: id, number, letter, direction
+Subject: id, name
+Cabinet: id, number, name ('math', 'biology', 'chemestry')
+School: id, name, adress
+parents: id,firstname, lastname, passport, gender, adress, telNumber, classID
+
+1. Find the number of students in grade 11 "A".
+2. Find the number of schools and gymnasiums in the city.
+3. Display a list of parents of students who study at school №5, in grade 11 "B". 
+
+1.Найти количество учеников, которые учатся в 11А классе
+2. Найти количество школ и гимназий в городе.
+3. Вывести список родителей учеников, которые учатся в школе №5, в 11 “Б” классе.
