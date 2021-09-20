@@ -1,0 +1,17 @@
+Well done!
+
+Homework
+Your answer is correct, great job!
+
+Test
+1
+-1
+I think that your code catch an error, because you're grouping by part of columns. In fact this grouping is useless, window function does not need a group by.
+
+2
+-1.5
+What is the purpose with mid step with group by cube? Pivot can perfectly do aggregations on it's own.
+Second option is too hard and you're have fixed number of car shops. It's not a dynamic solution.
+
+Mark: 10
+Test: 8
